@@ -1,0 +1,33 @@
+syntax = "v1"
+
+info(
+	title: "type title here"
+	desc: "type desc here"
+	author: "type author here"
+	email: "type email here"
+	version: "type version here"
+)
+
+type (
+	SearchReq {
+		Name string `form:"name"`
+	}
+	SearchReplay {
+		Name  string `json:"name"`
+		Count int    `json:"count"`
+	}
+)
+//单个路由的jwt验证及中间件
+@server(
+	jwt: Auth
+	//	middleware: Example
+)
+service search-api {
+	@handler Search
+	get /search/do (SearchReq) returns (SearchReplay)
+}
+
+service search-api {
+	@handler ping
+	get /search/ping
+}
